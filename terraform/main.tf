@@ -29,5 +29,10 @@ resource "aws_instance" "example" {
  }
 }
 
+resource "aws_iam_server_certificate" "www" {
+    name = "www"
+    certificate_body = "${vault_secret.www.data.cert}"
+    private_key = "${vault_secret.www.data.key}"
+}
 
 
