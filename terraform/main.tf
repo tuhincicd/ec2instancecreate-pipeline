@@ -5,7 +5,7 @@ provider "vault" {
 }
 
 resource "vault_secret" "aws" {
-    path = "/aws/creds/deploy"
+    path = "/aws/cred/deploy"
 }
 
 # Assuming a Vault entry with the following fields:
