@@ -29,12 +29,17 @@ resource "aws_instance" "example" {
  }
 }
 
-resource "aws_iam_server_certificate" "test_cert" {
-  
-  name             = "example_self_signed_cert"
-  certificate_body = "${tls_self_signed_cert.example.cert_pem}"
-  private_key      = "${tls_private_key.example.private_key_pem}"
-    
-    }
+resource "vault_secret" "cert" {
+    path = "/root/certs"
+}
+
+# Assuming a Vault entry with the following fields:
+#   cert
+#   key
+resource "aws_iam_server_certificate" "www" {
+    name = "www"
+    certificate_body = "${vault_secret.www.data.cert}"
+    private_key = "${vault_secret.www.data.key}"
+}
 
 
