@@ -38,7 +38,7 @@ resource "vault_secret" "cert" {
 #   key
 resource "aws_iam_server_certificate" "www" {
     
-    certificate_body = "/root/certs/"
+    certificate_body = "/root/certs/site.crt"
     private_key = "/root/certs/ap-southeast-1-test.pem"
 }
 
