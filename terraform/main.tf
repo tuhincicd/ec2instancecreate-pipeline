@@ -30,10 +30,11 @@ resource "aws_instance" "example" {
 }
 
 resource "aws_iam_server_certificate" "test_cert" {
-  name = "some_test_cert"
-  certificate_body = "${file("key/self-ca-cert.pem")}"
-  certificate_chain = "${file("key/self-ca-chain.pem")}"
-  private_key = "${file("key/test-key.pem")}"
-}
+  
+  name             = "example_self_signed_cert"
+  certificate_body = "${tls_self_signed_cert.example.cert_pem}"
+  private_key      = "${tls_private_key.example.private_key_pem}"
+    
+    }
 
 
