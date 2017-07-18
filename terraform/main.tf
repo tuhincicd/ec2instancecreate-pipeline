@@ -5,7 +5,7 @@ provider "vault" {
 }
 
 resource "vault_secret" "aws" {
-    path = "/aws/cred/deploy"
+    path = "/aws/creds/deploy"
 }
 
 # Assuming a Vault entry with the following fields:
@@ -13,8 +13,8 @@ resource "vault_secret" "aws" {
 #   secret_key
 
 provider "aws" {
-    access_key = "${vault_secret.aws.data.access_key}"
-    secret_key = "${vault_secret.aws.data.secret_key}"
+    access_key = "${vault_secret.aws.deploy.access_key}"
+    secret_key = "${vault_secret.aws.deploy.secret_key}"
     region = "ap-southeast-1"
 }
 
